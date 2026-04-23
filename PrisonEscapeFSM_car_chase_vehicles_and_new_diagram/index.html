@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prison Escape FSM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-shell">
+        <div class="top-branding">
+            <div>
+                <p class="eyebrow">Browser Game • Finite State Machine</p>
+                <h1>Prison Escape FSM</h1>
+            </div>
+            <div class="top-actions">
+                <button id="muteButton" class="ui-button secondary" type="button">Mute: Off</button>
+                <button id="restartButton" class="ui-button secondary" type="button">Restart</button>
+            </div>
+        </div>
+
+        <div class="canvas-wrap">
+            <canvas id="gameCanvas" width="1280" height="720" aria-label="Prison Escape Game Canvas"></canvas>
+
+            <div id="menuOverlay" class="overlay visible">
+                <div class="panel large-panel hero-panel">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Stealth • Prison Break • Guard AI</p>
+                        <h2>Escape the prison without getting caught.</h2>
+                        <p>
+                            Explore during the day. At night the guards switch to full FSM behavior:
+                            <strong>PATROL</strong>, <strong>SUSPICIOUS</strong>, <strong>SEARCH</strong>,
+                            <strong>CHASE</strong>, and <strong>RETURN</strong>.
+                        </p>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <span>Day / Night</span>
+                                <strong>Plan by day, escape by night</strong>
+                            </div>
+                            <div class="feature-card">
+                                <span>Guard AI</span>
+                                <strong>Independent 5-state FSM guards</strong>
+                            </div>
+                            <div class="feature-card">
+                                <span>Stealth</span>
+                                <strong>Vision, hearing, alerts, hiding spots</strong>
+                            </div>
+                            <div class="feature-card">
+                                <span>Objective</span>
+                                <strong>Reach the final gate before losing all lives</strong>
+                            </div>
+                        </div>
+                        <div class="mode-picker">
+                            <p class="mode-label">Game Mode</p>
+                            <div class="button-row">
+                                <button id="easyModeButton" class="ui-button secondary mode-option active-mode" type="button">Easy</button>
+                                <button id="hardModeButton" class="ui-button secondary mode-option" type="button">Hard</button>
+                                <button id="roamModeButton" class="ui-button secondary mode-option" type="button">Roam</button>
+                            </div>
+                            <p class="hint">Easy = fewer guards. Hard = faster guards. Roam = prison tour with no guards.</p>
+                        </div>
+                        <div class="button-row">
+                            <button id="playButton" class="ui-button primary" type="button">Play</button>
+                            <button id="howToPlayButton" class="ui-button secondary" type="button">How to Play</button>
+                        </div>
+                    </div>
+                    <div class="side-card">
+                        <h3>Controls</h3>
+                        <ul>
+                            <li><strong>WASD</strong> or <strong>Arrow Keys</strong> — move</li>
+                            <li><strong>Shift</strong> — walk slower / quieter</li>
+                            <li><strong>E</strong> — interact with cabinets, boards, switches, escapes</li>
+                            <li><strong>I</strong> or <strong>Tab</strong> — open inventory</li>
+                            <li><strong>E</strong> — interact or use selected inventory item</li>
+                            <li><strong>ESC</strong> — pause</li>
+                            <li><strong>M</strong> — mute audio</li>
+                            <li><strong>R</strong> — restart run</li>
+                        </ul>
+                        <p class="hint">Tip: hide before a guard fully commits to a chase.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pauseOverlay" class="overlay hidden">
+                <div class="panel small-panel centered-panel">
+                    <p class="eyebrow">Paused</p>
+                    <h2>Break Time</h2>
+                    <p>Press <strong>ESC</strong> to continue the escape attempt.</p>
+                    <div class="button-row centered-row">
+                        <button id="resumeButton" class="ui-button primary" type="button">Resume</button>
+                        <button id="pauseRestartButton" class="ui-button secondary" type="button">Restart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="howToPlayOverlay" class="overlay hidden">
+                <div class="panel medium-panel centered-panel">
+                    <p class="eyebrow">Mission Briefing</p>
+                    <h2>How to play</h2>
+                    <ol>
+                        <li>Leave your cell during the <strong>day</strong> and learn the prison.</li>
+                        <li>Watch where guards patrol and remember safe hiding spots.</li>
+                        <li>You have <strong>5 days</strong> to escape. Each <strong>day</strong> and <strong>night</strong> lasts 60 seconds.</li>
+                        <li>Search cabinets with <strong>E</strong> to find contraband like lockpicks, keycards, bottles, cutters, and disguises. Open the inventory with <strong>I</strong> to see item uses.</li>
+                        <li>Two rooms are <strong>keycard-locked</strong>. The vent and vehicle routes now lead into separate chase maps.</li>
+                        <li>Lose all 3 lives and the run ends. Reach the gate to win.</li>
+                    </ol>
+                    <div class="button-row centered-row">
+                        <button id="closeHowToPlayButton" class="ui-button primary" type="button">Got it</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/fsm.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
